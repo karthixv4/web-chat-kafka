@@ -60,4 +60,5 @@ public class ChatController {
         chatService.removeUserFromGroup(userId, groupId);
         return ResponseEntity.ok().build();
     }
+
 }

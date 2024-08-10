@@ -8,4 +8,5 @@ import com.example.demo.model.Message;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
     List<Message> findByGroupId(Long groupId);
+    List<Message> findBySenderId(Long senderId);
 }

@@ -1,67 +1,21 @@
 package com.example.demo.service;
 
-import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.data.GroupRepository;
-import com.example.demo.data.MessageRepository;
 import com.example.demo.data.UserRepository;
-import com.example.demo.kafka.ChatMessageProducer;
 import com.example.demo.model.Group;
-import com.example.demo.model.Message;
 import com.example.demo.model.User;
-import java.util.Date;
 
 @Service
-public class ChatService {
-
-    
-    @Autowired
-    private ChatMessageProducer chatMessageProducer; 
-    
-    @Autowired
-    private UserRepository userRepository;
+public class GroupService {
 
     @Autowired
     private GroupRepository groupRepository;
 
     @Autowired
-    private MessageRepository messageRepository;
-
-    public void sendMessage(Long userId, Long groupId, String content) {
-        Message message = new Message();
-        message.setContent(content);
-        message.setSenderId(userId);
-        message.setGroupId(groupId);
-        message.setCreatedAt(new Date());
-
-        // Save the message to the database
-        messageRepository.save(message);
-
-        // Send the message to Kafka
-        chatMessageProducer.sendMessage(message);
-    }
-
-    public List<Message> getMessagesForGroup(Long groupId) {
-        return messageRepository.findByGroupId(groupId);
-    }
-    public List<Message> getAllMessages() {
-        return messageRepository.findAll();
-    }
-
-    // Retrieve messages by user
-    public List<Message> getMessagesByUser(Long senderId) {
-        return messageRepository.findBySenderId(senderId);
-    }
-
-    public User createUser(String username) {
-        User user = new User();
-        user.setUsername(username);
-        return userRepository.save(user);
-    }
+    private UserRepository userRepository;
 
     public Group createGroup(String name, String code) {
         Group group = new Group();
@@ -79,11 +33,6 @@ public class ChatService {
 
         groupRepository.save(group);
         userRepository.save(user);
-    }
-
-    public Set<Group> getUserGroups(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        return user.getGroups();
     }
 
     public void removeUserFromGroup(Long userId, Long groupId) {
