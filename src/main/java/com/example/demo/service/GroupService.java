@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +52,10 @@ public class GroupService {
     public void deleteGroup(Long groupId) {
         Group group = groupRepository.findById(groupId).orElseThrow(() -> new RuntimeException("Group not found"));
         groupRepository.delete(group);
+    }
+
+    public Set<User> getUsersByGroup(Long groupId) {
+        Group group = groupRepository.findById(groupId).orElseThrow(() -> new RuntimeException("Group not found"));
+        return group.getUsers();
     }
 }

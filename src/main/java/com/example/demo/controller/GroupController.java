@@ -1,11 +1,15 @@
 package com.example.demo.controller;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.Group;
+import com.example.demo.model.User;
 import com.example.demo.service.GroupService;
 
 @RestController
@@ -36,5 +40,11 @@ public class GroupController {
     public ResponseEntity<Void> deleteGroup(@PathVariable Long groupId) {
         groupService.deleteGroup(groupId);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/groups/{groupId}/users")
+    public ResponseEntity<Set<User>> getUsersInGroup(@PathVariable Long groupId) {
+        Set<User> users = groupService.getUsersByGroup(groupId);
+        return ResponseEntity.ok(users);
     }
 }

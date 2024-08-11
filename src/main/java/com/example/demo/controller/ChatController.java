@@ -21,44 +21,44 @@ import com.example.demo.service.ChatService;
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {
-    @Autowired
-    private ChatService chatService;
+    // @Autowired
+    // private ChatService chatService;
 
 
-    @PostMapping("/users")
-    public ResponseEntity<User> createUser(@RequestBody String username) {
-        User user = chatService.createUser(username);
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
-    }
+    // @PostMapping("/users")
+    // public ResponseEntity<User> createUser(@RequestBody String username) {
+    //     User user = chatService.createUser(username);
+    //     return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    // }
 
-    @PostMapping("/groups")
-    public ResponseEntity<Group> createGroup(@RequestBody Group group) {
-        Group createdGroup = chatService.createGroup(group.getName(), group.getCode());
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdGroup);
-    }
+    // @PostMapping("/groups")
+    // public ResponseEntity<Group> createGroup(@RequestBody Group group) {
+    //     Group createdGroup = chatService.createGroup(group.getName(), group.getCode());
+    //     return ResponseEntity.status(HttpStatus.CREATED).body(createdGroup);
+    // }
 
-    @PostMapping("/groups/join")
-    public ResponseEntity<Void> joinGroup(@RequestParam Long userId, @RequestParam Long groupId) {
-        chatService.joinGroup(userId, groupId);
-        return ResponseEntity.ok().build();
-    }
+    // @PostMapping("/groups/join")
+    // public ResponseEntity<Void> joinGroup(@RequestParam Long userId, @RequestParam Long groupId) {
+    //     chatService.joinGroup(userId, groupId);
+    //     return ResponseEntity.ok().build();
+    // }
 
-    @GetMapping("/users/{userId}/groups")
-    public ResponseEntity<Set<Group>> getUserGroups(@PathVariable Long userId) {
-        Set<Group> groups = chatService.getUserGroups(userId);
-        return ResponseEntity.ok(groups);
-    }
+    // @GetMapping("/users/{userId}/groups")
+    // public ResponseEntity<Set<Group>> getUserGroups(@PathVariable Long userId) {
+    //     Set<Group> groups = chatService.getUserGroups(userId);
+    //     return ResponseEntity.ok(groups);
+    // }
 
-    @PostMapping("/send")
-    public ResponseEntity<Void> sendMessage(@RequestBody SendMessageRequest request) {
-        chatService.sendMessage(request.getSenderId(), request.getGroupId(), request.getContent());
-        return ResponseEntity.ok().build();
-    }
+    // @PostMapping("/send")
+    // public ResponseEntity<Void> sendMessage(@RequestBody SendMessageRequest request) {
+    //     chatService.sendMessage(request.getSenderId(), request.getGroupId(), request.getContent());
+    //     return ResponseEntity.ok().build();
+    // }
 
-    @PostMapping("/groups/leave")
-    public ResponseEntity<Void> leaveGroup(@RequestParam Long userId, @RequestParam Long groupId) {
-        chatService.removeUserFromGroup(userId, groupId);
-        return ResponseEntity.ok().build();
-    }
+    // @PostMapping("/groups/leave")
+    // public ResponseEntity<Void> leaveGroup(@RequestParam Long userId, @RequestParam Long groupId) {
+    //     chatService.removeUserFromGroup(userId, groupId);
+    //     return ResponseEntity.ok().build();
+    // }
 
 }

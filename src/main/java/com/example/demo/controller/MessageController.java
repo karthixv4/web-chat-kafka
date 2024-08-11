@@ -36,4 +36,6 @@ public class MessageController {
         List<Message> messages = messageService.getMessagesByUser(senderId);
         return ResponseEntity.ok(messages);
     }
+
+    
 }

@@ -3,6 +3,7 @@ package com.example.demo.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -28,7 +29,7 @@ public class Group {
         joinColumns = @JoinColumn(name = "group_id"),
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-     @JsonManagedReference
+    @JsonIgnore
     private Set<User> users = new HashSet<>();
 
     public Long getId() {
